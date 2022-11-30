@@ -34,9 +34,9 @@ document.addEventListener("keydown", (e) => {
 
 
 //let enemy = document.getElementById("enemy");
-let y = 1;
-let gravity = -10;
-let wit
+//let y = 1;
+//let gravity = -10;
+//let wit
 
 /*let move = setInterval(function(){
 
@@ -58,13 +58,13 @@ function createEnemy() {
     let enemyBottom = 0;
     console.log(enemyBottom);
     // Math.round(Math.floor(Math.random() * (500 - 1)/10)*10)
-    enemy.style.left = Math.round(Math.round(Math.random() * 700)/10)*10 + "px";
+    enemy.style.left = Math.round(Math.round(Math.random() * 1000)/10)*10 + "px";
 
     enemy.style.top = enemyTop + "px";
     enemy.style.bottom = enemyBottom + "px";
     enemy.id = enemyId;
     let y = 1;
-    let gravity = -10;
+    let gravity =+1;
 
 
     let move = setInterval(() => {
