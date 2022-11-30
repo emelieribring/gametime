@@ -12,13 +12,13 @@ document.addEventListener("keydown", (e) => {
     switch (e.key) {
         case "d":
         case "ArrowRight":
-            console.log("vi går upp");
+            console.log("vi går uppåt");
             left += 10;
             hero.style.left = left + "px"
         break;
         case "a":
-        case "ArrowDown":
-            console.log("vi går ner");
+        case "ArrowLeft":
+            console.log("vi går vänster");
             left -= 10;
             hero.style.left = left + "px"
         break;
@@ -42,7 +42,7 @@ let wit
 let move = setInterval(function(){
 
     if (y>420) gravity = -gravity;
-    gravity += 0.57;
+    gravity += 0.55;
     y += gravity;
     
     enemy1.style.top = (y) + 'px';
@@ -57,4 +57,12 @@ let move = setInterval(function(){
 },30)
 
 
-setTimeout(() => { clearInterval(move); alert('Game Over'); }, 30000);
+setTimeout(() => { clearInterval(move); alert('Game Over!'); }, 30000);
+
+function winGame (){
+    if (hero.style.left > enemy1.style.left) {
+        alert('You win!');
+      }
+}
+
+
