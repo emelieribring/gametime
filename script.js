@@ -5,6 +5,7 @@ let message = document.getElementById("message");
 let bottom = 0;
 let left = 30;
 
+const mytimeout = setTimeout(() => { clearInterval(move); message.innerHTML = 'Game Over', button(); }, 10000);
 
 document.addEventListener("keydown", (e) => {
     console.log ("e", e.key);
@@ -33,7 +34,7 @@ let enemyfyra = document.getElementById("enemy4")
 let enemyfem = document.getElementById("enemy5")
 
 let y = 1;
-let gravity = 1;
+let gravity = 10;
 
 let goal = document.getElementById("goal");
 goal.style.left = 1350 + 'px';
@@ -42,8 +43,12 @@ let move = setInterval(function(){
 
     if (hero.style.left === 1350 + 'px') {
         message.innerHTML = 'YOU WIN';
-        clearInterval(move)
-      }
+        button();
+        clearInterval(move);
+        clearTimeout(mytimeout);
+        return
+      } 
+
 
         if (y>410) gravity = -gravity;
         gravity += 1;
@@ -69,11 +74,26 @@ let move = setInterval(function(){
         if (y > 500){
             clearInterval(move)
         }
+
     
         },30) 
     
+        
+        let btn = document.createElement("BUTTON");
+        let btnText = document.createTextNode("PLAY AGAIN?")
+        btn.appendChild(btnText)
+        btn.id = button;
 
-        setTimeout(() => { clearInterval(move); alert('Game Over'); }, 30000);
+
+        function button (){
+            game.appendChild(btn);
+
+            btn.addEventListener("click", () => {
+                location.reload()
+            })
+        }
+
+        
 
         
 
