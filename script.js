@@ -27,14 +27,12 @@ document.addEventListener("keydown", (e) => {
 
 let enemy = document.getElementById("enemy");
 let y = 1;
-let gravity = 1;
-let wit
+let gravity = 50;
 
 let move = setInterval(function(){
 
-    if (y>420) gravity = -gravity;
-    gravity += 1;
-    y += gravity;
-    enemy.style.top = (y) + 'px';
-},30)
-
+        if (y>420) gravity = -gravity;
+        gravity += 1;
+        y += gravity;
+        enemy.style.top = (y) + 'px';
+        },30)
