@@ -9,6 +9,48 @@ canvas.height = window.innerHeight;
 let l = canvas.getContext('2d');
  
 
+    // x and y are the coordinates of the circle
+    // vx and vy are the respective speeds
+    var x = Math.floor(Math.random() * innerWidth);
+    var y = Math.floor(Math.random() * innerHeight);
+    var vx = Math.floor(Math.random() * 2);
+    var vy = Math.floor(Math.random() * 4);
+    var radius = 20;
+ 
+    move();
+   
+    // This function will do the animation
+    function move() {
+        requestAnimationFrame(move);
+ 
+        // It clears the specified pixels within
+        // the given rectangle
+        l.clearRect(0, 0, innerWidth, innerHeight);
+ 
+        // Creating a circle
+        l.beginPath();
+        l.strokeStyle = "black";
+        l.arc(x, y, radius, 0, Math.PI * 2, false);
+        l.stroke();
+ 
+        // Conditions so that the ball bounces
+        // from the edges
+        if (radius + x > innerWidth)
+            vx = 0 - vx;
+ 
+        if (x - radius < 0)
+            vx = 0 - vx;
+ 
+        if (y + radius > innerHeight)
+            vy = 0 - vy;
+ 
+        if (y - radius < 0)
+            vy = 0 - vy;
+ 
+        x = x + vx;
+        y = y + vy;
+ 
+    }
 let bottom = 0;
 let left = 30;
 
@@ -32,24 +74,9 @@ document.addEventListener("keydown", (e) => {
     }
 })
 
-
-//let enemy = document.getElementById("enemy");
-//let y = 1;
-//let gravity = -10;
-//let wit
-
-/*let move = setInterval(function(){
-
-    if (y>620) gravity = -gravity;
-    gravity -= 1;
-    y -= gravity;
-    enemy.style.top = (y) + 'px';
-},30)*/
-
-
 let enemyId = 0;
 
-function createEnemy() {
+/*function createEnemy() {
     enemyId++
     
     let enemy = document.createElement("div");
@@ -70,8 +97,8 @@ function createEnemy() {
     let move = setInterval(() => {
         //enemyTop += 5;
         enemy.style.top = (y) + "px";
-        if (y>600) gravity =- gravity;
-            gravity -= 10;
+        if (y>420) gravity =- gravity;
+            gravity -= 1;
             y -= gravity;
        
 
@@ -103,6 +130,10 @@ function createEnemy() {
 }
 
 createEnemy();
-if ( enemyId > 600){
-    createEnemy();
-} 
+*/
+
+function lose () {setTimeout(() => { clearInterval(move); alert('Game Over!') 
+    }, 30000);
+
+}
+lose ();
