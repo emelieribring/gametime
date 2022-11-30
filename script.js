@@ -1,13 +1,15 @@
 let hero = document.getElementById("hero");
 let game = document.getElementById("game");
-let floor = document.getElementById("floor");
-const canvas = document.querySelector("canvas");
+let enemy1 = document.getElementById("enemy1");
+let enemy2 = document.getElementById("enemy2");
+let enemy3 = document.getElementById("enemy3");
+let enemy4 = document.getElementById("enemy4");
+let enemy5 = document.getElementById("enemy5");
+let enemy6 = document.getElementById("enemy6");
+let enemy7 = document.getElementById("enemy7");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
 
-let l = canvas.getContext('2d');
- 
+
 
 let bottom = 0;
 let left = 30;
@@ -15,94 +17,84 @@ let left = 30;
 
 document.addEventListener("keydown", (e) => {
     console.log ("e", e.key);
-
+    function checkOverlap(lineA, lineB) {
+        return lineA.start >= lineB.start && lineA.start <= lineB.end || 
+               lineA.end >= lineB.start && lineA.end <= lineB.end ||
+               lineB.start >= lineA.start && lineB.start <= lineA.end || 
+               lineB.end >= lineA.start && lineB.end <= lineA.end;
+    }
+    console.log(checkOverlap (hero, enemy1));
     switch (e.key) {
         case "d":
         case "ArrowRight":
-            console.log("vi går upp");
+            console.log("vi går uppåt");
             left += 10;
             hero.style.left = left + "px"
         break;
         case "a":
         case "ArrowLeft":
-            console.log("vi går ner");
+            console.log("vi går vänster");
             left -= 10;
             hero.style.left = left + "px"
         break;
+        
     }
 })
 
 
-//let enemy = document.getElementById("enemy");
-//let y = 1;
-//let gravity = -10;
-//let wit
-
-/*let move = setInterval(function(){
-
-    if (y>620) gravity = -gravity;
-    gravity -= 1;
-    y -= gravity;
-    enemy.style.top = (y) + 'px';
-},30)*/
 
 
-let enemyId = 0;
 
-function createEnemy() {
-    enemyId++
+let y = 1;
+let gravity = 1;
+let wit
+
+
+function move () { setInterval(function(){
+
+    if (y>420) gravity = -gravity;
+    gravity += 0.55;
+    y += gravity;
     
-    let enemy = document.createElement("div");
-    enemy.classList = "enemy";
-    let enemyTop = Math.round(Math.round(Math.random() * 500)/10)*10;
-    let enemyBottom = 0;
-    console.log(enemyBottom);
-    // Math.round(Math.floor(Math.random() * (500 - 1)/10)*10)
-    enemy.style.left = Math.round(Math.round(Math.random() * 1000)/10)*10 + "px";
+    enemy1.style.top = (y) + 'px';
+    enemy2.style.top = (y) + 'px';
+    enemy3.style.top = (y) + 'px';
+    enemy4.style.top = (y) + 'px';
+    enemy5.style.top = (y) + 'px';
+    enemy6.style.top = (y) + 'px';
+    enemy7.style.top = (y) + 'px';
 
-    enemy.style.top = enemyTop + "px";
-    enemy.style.bottom = enemyBottom + "px";
-    enemy.id = enemyId;
-    let y = 1;
-    let gravity =+1;
+    
+    },30)
+}
+move ();
 
 
-    let move = setInterval(() => {
-        //enemyTop += 5;
-        enemy.style.top = (y) + "px";
-        if (y>600) gravity =- gravity;
-            gravity -= 10;
-            y -= gravity;
-       
 
-        if (enemyBottom > bottom && enemyBottom < bottom + 150 && enemyTop === top) {
-            console.log("HIT");
 
-            let dead = setInterval(() => {
-                hero.style.backgroundColor = "red";
+//let allEnemy = {enemy1, enemy2, enemy3, enemy4, enemy5, enemy6, enemy7};
 
-                let resurect = setInterval(() => {
-                    hero.style.backgroundColor = "purple"
-                    clearInterval(dead)
-                }, 100)
-
-            }, 100)
-            
-        
-        }
-
-        if (enemyTop <= 0) {
-            clearInterval(move);
-            enemy.remove();
-            createEnemy();
-        }
-
-    }, 50)
-
-    game.appendChild(enemy);
+/*function isCollide(a, b) {
+    return !(
+        ((a.y + a.height) < (b.y)) ||
+        (a.y > (b.y + b.height)) ||
+        ((a.x + a.width) < b.x) ||
+        (a.x > (b.x + b.width))
+    );
 }
 
-createEnemy();
-if ( enemyId > 600){
-    createEnemy();
-} 
+if (isCollide(hero, enemy1));*/
+
+function lose () {setTimeout(() => { clearInterval(move); //alert('Game Over!') 
+location.reload(); }, 100000);
+    
+}
+lose ();
+
+
+function winGame (){
+    if (hero.style.left > enemy1.style.left) {
+        alert('You win!');
+      }
+}
+
