@@ -43,6 +43,12 @@ body{
     font-family: lemon love;
 }
 
+#button{
+    position: absolute;
+    top: 100px;
+    left: 500px;
+}
+
 .enemy{
     background-color: rgb(163, 56, 56);
     border-radius: 50%;
