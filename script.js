@@ -33,8 +33,20 @@ let enemytre = document.getElementById("enemy3")
 let enemyfyra = document.getElementById("enemy4")
 let enemyfem = document.getElementById("enemy5")
 
-let y = 1;
-let gravity = 10;
+function checkForCollisions() {
+    setInterval(() => {
+        let enemyPositions = enemy.getBoundingClientRect();
+        let heroPositions = hero.getBoundingClientRect();
+        let rightOverlap = (heroPositions.right >= enemyPositions.left && heroPositions.right <= enemyPositions.right);
+        let bottomOverlap = (heroPositions.right >= enemyPositions.bottom);
+        if (rightOverlap && bottomOverlap) {
+            alert('YOU LOOSE');
+            clearInterval(move); 
+            message.innerHTML = 'Game Over';
+            button();
+        } 
+    }, 10)
+};
 
 let goal = document.getElementById("goal");
 goal.style.left = 1350 + 'px';
@@ -47,37 +59,12 @@ let move = setInterval(function(){
         clearInterval(move);
         clearTimeout(mytimeout);
         return
-      } 
+      }
+    } )
 
-
-        if (y>410) gravity = -gravity;
-        gravity += 1;
-        y += gravity;
-        enemy.style.top = (y) + 'px';
-
-        
-        enemytvå.style.top = (y) + 'px';
-        enemytvå.style.left = 300 + 'px';
-
-       
-        enemytre.style.top = (y) + 'px';
-        enemytre.style.left = 500 + 'px';
-
-       
-        enemyfyra.style.top = (y) + 'px';
-        enemyfyra.style.left = 900 + 'px';
-
+      
     
-        enemyfem.style.top = (y) + 'px';
-        enemyfem.style.left = 1200 + 'px';
-
-        if (y > 500){
-            clearInterval(move)
-        }
-
-    
-        },30) 
-    
+      checkForCollisions();
         
         let btn = document.createElement("BUTTON");
         let btnText = document.createTextNode("PLAY AGAIN?")
@@ -92,9 +79,4 @@ let move = setInterval(function(){
                 location.reload()
             })
         }
-
-        
-
-        
-
-        
+    
